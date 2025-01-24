@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Falla</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .venta {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            border: 4px solid #ed7318; /* Marco más grueso y color naranja */
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px; /* Ajuste del tamaño de la venta */
+            text-align: center;
+            position: relative;
+        }
+        .venta-content {
+            position: relative;
+            z-index: 1;
+        }
+        .venta p {
+            margin: 10px 0; /* Ajuste de margen para pegar más el texto al logo */
+            color: black; /* Texto en color negro */
+            font-size: 16px;
+            text-align: left; /* Alinear texto a la izquierda */
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: black; /* Texto en color negro */
+            margin-top: 10px; /* Ajuste de margen superior */
+        }
+        .header-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .header-images img {
+            width: 19.5%; /* Reducción del tamaño de las imágenes en un 35% */
+            height: auto;
+            margin: 0 10px;
+        }
+        .note {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .boton {
+            background-color: #003366; /* Color del botón de realizar reporte (azul oscuro) */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .boton-volver {
+            background-color: #ed7318; /* Color naranja */
+        }
+        .boton-whatsapp {
+            background-color: #25d366; /* Color verde Whatsapp */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .boton:hover {
+            background-color: #002244; /* Azul oscuro más oscuro */
+        }
+        .boton-volver:hover {
+            background-color: #d66616; /* Color naranja oscuro */
+        }
+        .boton-whatsapp:hover {
+            background-color: #1ebc58; /* Verde más oscuro */
+        }
+        .whatsapp-icon {
+            margin-right: 5px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body onload="openModal()">
+    <div class="overlay" id="overlay">
+        <div class="venta">
+            <button class="close-button" onclick="window.location.href='https://www.vendeygana.net/user/'">X</button>
+            <div class="venta-content">
+                <div class="header-images">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6078/6078617.png" alt="Reporte de Falla">
+                    <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Vende y Gana">
+                </div>
+                <p class="note">TODA FALLA DEBE SER REPORTADA POR SISTEMA AUN CUANDO HABLE CON UN ASESOR DE SOPORTE TECNICO</p>
+                <div class="header-title">REPORTE DE FALLA</div>
+                <p>Lamentamos el inconveniente y vamos a trabajar arduamente para solventarlo. Recuerda que si el reporte es de Netflix con contraseña incorrecta, deberás realizar el reporte por aquí y esperar entre 1 y 24 horas, ya que Netflix ha colocado muchos inconvenientes para solventar fallas.</p>
+                <p>Si tu reporte es de tu hogar, escribe a nuestro WhatsApp de atención y solicita el código.</p>
+                <p>Si es solicitud de códigos para ingresos en cuentas Amazon Prime o Disney, por favor escribe a nuestro chat para que nuestro personal te dé las instrucciones y el código, ya que este debe ser solicitado y entregado en 15 minutos máximo.</p>
+                <p>ATENTAMENTE: DEPARTAMENTO DE SOPORTE TÉCNICO VENDE Y GANA</p>
+                <div class="botones">
+                    <button class="boton" onclick="window.location.href='https://dptodecomprasvg.company.site/products/REPORTE-DE-FALLA-p721233330'">REALIZAR REPORTE</button>
+                    <button class="boton boton-volver" onclick="window.location.href='https://www.vendeygana.net/user/'">Volver a Vende y Gana</button>
+                    <button class="boton boton-whatsapp" onclick="window.location.href='https://wa.me/584247388620'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp" width="20" height="20">
+                        Contactar con Soporte Técnico
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
