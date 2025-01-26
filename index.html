@@ -116,6 +116,49 @@
             font-weight: bold;
             z-index: 2;
         }
+        .greeting {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .after-hours-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .after-hours-venta {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            border: 4px solid #ed7318; /* Marco más grueso y color naranja */
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px; /* Ajuste del tamaño de la venta */
+            text-align: center;
+            position: relative;
+        }
+        .after-hours-close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+            z-index: 2;
+        }
     </style>
 </head>
 <body onload="openModal()">
@@ -127,6 +170,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/6078/6078617.png" alt="Reporte de Falla">
                     <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Vende y Gana">
                 </div>
+                <p class="greeting" id="greeting"></p>
                 <p class="note">TODA FALLA DEBE SER REPORTADA POR SISTEMA AUN CUANDO HABLE CON UN ASESOR DE SOPORTE TECNICO</p>
                 <div class="header-title">REPORTE DE FALLA</div>
                 <p>Lamentamos el inconveniente y vamos a trabajar arduamente para solventarlo. Recuerda que si el reporte es de Netflix con contraseña incorrecta, deberás realizar el reporte por aquí y esperar entre 1 y 24 horas, ya que Netflix ha colocado muchos inconvenientes para solventar fallas.</p>
@@ -134,9 +178,9 @@
                 <p>Si es solicitud de códigos para ingresos en cuentas Amazon Prime o Disney, por favor escribe a nuestro chat para que nuestro personal te dé las instrucciones y el código, ya que este debe ser solicitado y entregado en 15 minutos máximo.</p>
                 <p>ATENTAMENTE: DEPARTAMENTO DE SOPORTE TÉCNICO VENDE Y GANA</p>
                 <div class="botones">
-                    <button class="boton" onclick="window.location.href='https://dptodecomprasvg.company.site/products/REPORTE-DE-FALLA-p721233330'">REALIZAR REPORTE</button>
+                    <button class="boton" onclick="handleButtonClick('https://dptodecomprasvg.company.site/products/REPORTE-DE-FALLA-p721233330')">REALIZAR REPORTE</button>
                     <button class="boton boton-volver" onclick="window.location.href='https://www.vendeygana.net/user/'">Volver a Vende y Gana</button>
-                    <button class="boton boton-whatsapp" onclick="window.location.href='https://wa.me/584247388620'">
+                    <button class="boton boton-whatsapp" onclick="handleButtonClick('https://wa.me/584247388620')">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp" width="20" height="20">
                         Contactar con Soporte Técnico
                     </button>
@@ -145,9 +189,78 @@
         </div>
     </div>
 
+    <div class="after-hours-overlay" id="after-hours-overlay">
+        <div class="after-hours-venta">
+            <button class="after-hours-close-button" onclick="closeAfterHoursModal()">X</button>
+            <div class="header-images">
+                <img src="https://www3.gobiernodecanarias.org/medusa/edublog/ceiplasdunas/wp-content/uploads/sites/640/2020/12/gif-aviso.gif" alt="Fuera de servicio">
+            </div>
+            <p>Horario de atención:</p>
+            <p>LUNES A SABADO DE 7:00 AM A 8:00 PM</p>
+            <p>DOMINGOS DE 10:00 AM A 8:00 PM</p>
+            <p>Estimado usuario, realiza el reporte de la falla. Lamentamos el inconveniente, pero recuerda que nuestro personal de SOPORTE TÉCNICO en este horario está fuera de servicio y atenderá tu reporte al estar nuevamente activo.</p>
+            <div class="botones">
+                <button class="boton" onclick="window.location.href='https://dptodecomprasvg.company.site/products/REPORTE-DE-FALLA-p721233330'">REALIZAR REPORTE</button>
+                <button class="boton boton-whatsapp" onclick="window.location.href='https://wa.me/584247388620'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp" width="20" height="20">
+                    Contactar con Soporte Técnico
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openModal() {
             document.getElementById('overlay').style.display = 'flex';
+            setGreeting();
+        }
+
+        function setGreeting() {
+            const greetingElement = document.getElementById('greeting');
+            const now = new Date();
+            const hours = now.getHours();
+            const day = now.getDay();
+            const daysOfWeek = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+            let greeting = "";
+
+            if (hours < 12) {
+                greeting = "Buenos días";
+            } else if (hours < 18) {
+                greeting = "Buenas tardes";
+            } else {
+                greeting = "Buenas noches";
+            }
+
+            const dayName = daysOfWeek[day];
+            if (day === 1) { // Lunes
+                greeting += `, feliz y bendecido inicio de semana para ti y los tuyos, te deseamos desde Vende y Gana. Éxito en tus ventas. Feliz ${dayName}!`;
+            } else if ( day === 5 || day === 6 || day === 0) { // Viernes, Sábado o Domingo
+                greeting += `, bendecido fin de semana para ti y los tuyos, te deseamos desde Vende y Gana. Feliz ${dayName}!`;
+            } else {
+                greeting += `, feliz ${dayName}!`;
+            }
+
+            greetingElement.textContent = greeting;
+        }
+
+        function handleButtonClick(url) {
+            const now = new Date();
+            const hours = now.getHours();
+            const day = now.getDay();
+
+            if ((day >= 1 && day <= 6 && (hours < 7 || hours >= 20)) || (day === 0 && (hours < 10 || hours >= 20))) {
+                openAfterHoursModal();
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        function openAfterHoursModal() {
+            document.getElementById('after-hours-overlay').style.display = 'flex';
+        }
+
+        function closeAfterHoursModal() {
+            document.getElementById('after-hours-overlay').style.display = 'none';
         }
     </script>
 </body>
