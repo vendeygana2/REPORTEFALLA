@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #000;
         }
         .overlay {
             position: fixed;
@@ -17,19 +17,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
         .venta {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-            border: 4px solid #ed7318; /* Marco más grueso y color naranja */
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 4px solid #ed7318;
             border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             padding: 20px;
-            max-width: 600px; /* Ajuste del tamaño de la venta */
+            max-width: 600px;
             text-align: center;
             position: relative;
         }
@@ -38,16 +38,16 @@
             z-index: 1;
         }
         .venta p {
-            margin: 10px 0; /* Ajuste de margen para pegar más el texto al logo */
-            color: black; /* Texto en color negro */
+            margin: 10px 0;
+            color: white;
             font-size: 16px;
-            text-align: left; /* Alinear texto a la izquierda */
+            text-align: left;
         }
         .header-title {
             font-size: 18px;
             font-weight: bold;
-            color: black; /* Texto en color negro */
-            margin-top: 10px; /* Ajuste de margen superior */
+            color: white;
+            margin-top: 10px;
         }
         .header-images {
             display: flex;
@@ -56,13 +56,22 @@
             margin-bottom: 10px;
         }
         .header-images img {
-            width: 19.5%; /* Reducción del tamaño de las imágenes en un 35% */
             height: auto;
             margin: 0 10px;
+        }
+        .header-images img:first-child {
+            width: 80px;
+        }
+        .header-images img:last-child {
+            width: 200px;
         }
         .note {
             font-weight: bold;
             margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
+            animation: blink 1s linear infinite;
+            color: yellow; /* Cambiado a amarillo (#FFFF00) */
         }
         .botones {
             display: flex;
@@ -71,7 +80,7 @@
             margin-top: 20px;
         }
         .boton {
-            background-color: #003366; /* Color del botón de realizar reporte (azul oscuro) */
+            background-color: #003366;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -79,26 +88,8 @@
             cursor: pointer;
             text-transform: uppercase;
         }
-        .boton-volver {
-            background-color: #ed7318; /* Color naranja */
-        }
-        .boton-whatsapp {
-            background-color: #25d366; /* Color verde Whatsapp */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
         .boton:hover {
-            background-color: #002244; /* Azul oscuro más oscuro */
-        }
-        .boton-volver:hover {
-            background-color: #d66616; /* Color naranja oscuro */
-        }
-        .boton-whatsapp:hover {
-            background-color: #1ebc58; /* Verde más oscuro */
-        }
-        .whatsapp-icon {
-            margin-right: 5px;
+            background-color: #002244;
         }
         .close-button {
             position: absolute;
@@ -120,30 +111,37 @@
             font-size: 16px;
             font-weight: bold;
             margin-bottom: 10px;
+            color: white;
         }
-        .after-hours-overlay {
+        .form-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
         }
-        .after-hours-venta {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-            border: 4px solid #ed7318; /* Marco más grueso y color naranja */
+        .form-container {
+            background-color: black;
+            border: 4px solid #ed7318;
             border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 600px; /* Ajuste del tamaño de la venta */
-            text-align: center;
+            width: 90%;
+            height: 90%;
+            max-width: 1000px;
+            max-height: 800px;
             position: relative;
         }
-        .after-hours-close-button {
+        .form-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        .form-close-button {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -159,6 +157,11 @@
             font-weight: bold;
             z-index: 2;
         }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body onload="openModal()">
@@ -168,7 +171,7 @@
             <div class="venta-content">
                 <div class="header-images">
                     <img src="https://cdn-icons-png.flaticon.com/512/6078/6078617.png" alt="Reporte de Falla">
-                    <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Vende y Gana">
+                    <img src="https://i.pinimg.com/736x/ff/ba/22/ffba22aac24ab14dcf87745505510936.jpg" alt="Vende y Gana">
                 </div>
                 <p class="greeting" id="greeting"></p>
                 <p class="note">TODA FALLA DEBE SER REPORTADA POR SISTEMA AUN CUANDO HABLE CON UN ASESOR DE SOPORTE TECNICO</p>
@@ -178,34 +181,16 @@
                 <p>Si es solicitud de códigos para ingresos en cuentas Amazon Prime o Disney, por favor escribe a nuestro chat para que nuestro personal te dé las instrucciones y el código, ya que este debe ser solicitado y entregado en 15 minutos máximo.</p>
                 <p>ATENTAMENTE: DEPARTAMENTO DE SOPORTE TÉCNICO VENDE Y GANA</p>
                 <div class="botones">
-                    <button class="boton" onclick="handleButtonClick('https://online.forms.app/respuestasdereportesdefa/reportefalla')">REALIZAR REPORTE</button>
-                    <button class="boton boton-volver" onclick="window.location.href='https://www.vendeygana.net/user/'">Volver a Vende y Gana</button>
-                    <button class="boton boton-whatsapp" onclick="handleButtonClick('https://wa.me/584247388620')">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp" width="20" height="20">
-                        Contactar con Soporte Técnico
-                    </button>
+                    <button class="boton" onclick="openFormModal()">REALIZAR REPORTE</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="after-hours-overlay" id="after-hours-overlay">
-        <div class="after-hours-venta">
-            <button class="after-hours-close-button" onclick="closeAfterHoursModal()">X</button>
-            <div class="header-images">
-                <img src="https://www3.gobiernodecanarias.org/medusa/edublog/ceiplasdunas/wp-content/uploads/sites/640/2020/12/gif-aviso.gif" alt="Fuera de servicio">
-            </div>
-            <p>Horario de atención:</p>
-            <p>LUNES A SABADO DE 7:00 AM A 8:00 PM</p>
-            <p>DOMINGOS DE 10:00 AM A 8:00 PM</p>
-            <p>Estimado usuario, realiza el reporte de la falla. Lamentamos el inconveniente, pero recuerda que nuestro personal de SOPORTE TÉCNICO en este horario está fuera de servicio y atenderá tu reporte al estar nuevamente activo.</p>
-            <div class="botones">
-                <button class="boton" onclick="window.location.href='https://online.forms.app/respuestasdereportesdefa/reportefalla'">REALIZAR REPORTE</button>
-                <button class="boton boton-whatsapp" onclick="window.location.href='https://wa.me/584247388620'">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp" width="20" height="20">
-                    Contactar con Soporte Técnico
-                </button>
-            </div>
+    <div class="form-overlay" id="form-overlay">
+        <div class="form-container">
+            <button class="form-close-button" onclick="closeFormModal()">X</button>
+            <iframe src="https://vendeygana.forms.app/reportefalla" class="form-iframe" title="Reporte de Falla"></iframe>
         </div>
     </div>
 
@@ -232,9 +217,9 @@
             }
 
             const dayName = daysOfWeek[day];
-            if (day === 1) { // Lunes
+            if (day === 1) {
                 greeting += `, feliz y bendecido inicio de semana para ti y los tuyos, te deseamos desde Vende y Gana. Éxito en tus ventas. Feliz ${dayName}!`;
-            } else if ( day === 5 || day === 6 || day === 0) { // Viernes, Sábado o Domingo
+            } else if (day === 5 || day === 6 || day === 0) {
                 greeting += `, bendecido fin de semana para ti y los tuyos, te deseamos desde Vende y Gana. Feliz ${dayName}!`;
             } else {
                 greeting += `, feliz ${dayName}!`;
@@ -243,24 +228,12 @@
             greetingElement.textContent = greeting;
         }
 
-        function handleButtonClick(url) {
-            const now = new Date();
-            const hours = now.getHours();
-            const day = now.getDay();
-
-            if ((day >= 1 && day <= 6 && (hours < 7 || hours >= 20)) || (day === 0 && (hours < 10 || hours >= 20))) {
-                openAfterHoursModal();
-            } else {
-                window.location.href = url;
-            }
+        function openFormModal() {
+            document.getElementById('form-overlay').style.display = 'flex';
         }
 
-        function openAfterHoursModal() {
-            document.getElementById('after-hours-overlay').style.display = 'flex';
-        }
-
-        function closeAfterHoursModal() {
-            document.getElementById('after-hours-overlay').style.display = 'none';
+        function closeFormModal() {
+            document.getElementById('form-overlay').style.display = 'none';
         }
     </script>
 </body>
