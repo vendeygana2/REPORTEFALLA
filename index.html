@@ -45,26 +45,27 @@
         .venta p {
             margin: 8px 0;
             color: white;
-            font-size: 14px;
+            font-size: 15px;
             text-align: left;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         .header-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             color: white;
-            margin: 10px 0 5px 0;
+            margin: 15px 0 10px 0;
+            text-align: center;
         }
         .header-images {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
+            gap: 15px;
         }
         .header-images img {
             height: auto;
-            margin: 5px;
             max-width: 100%;
         }
         .header-images img:first-child {
@@ -75,30 +76,33 @@
         }
         .note {
             font-weight: bold;
-            margin: 10px 0;
+            margin: 15px 0;
             font-size: 16px;
             text-align: center;
             animation: blink 1s linear infinite;
             color: yellow;
-            line-height: 1.3;
+            line-height: 1.4;
+            padding: 0 5px;
         }
         .botones {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 20px;
         }
         .boton {
             background-color: #003366;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-transform: uppercase;
-            font-size: 14px;
+            font-size: 15px;
             width: 100%;
             box-sizing: border-box;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
         .boton:hover {
             background-color: #002244;
@@ -121,11 +125,12 @@
             font-size: 14px;
         }
         .greeting {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             color: white;
-            line-height: 1.3;
+            line-height: 1.4;
+            text-align: center;
         }
         .form-overlay {
             position: fixed;
@@ -174,15 +179,74 @@
             z-index: 2;
             font-size: 14px;
         }
+        .time-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .time-message {
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 4px solid #ed7318;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .time-message p {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-align: center;
+        }
+        .time-message img {
+            max-width: 60%; /* Reducida en un 40% */
+            height: auto;
+            margin: 15px auto;
+            border-radius: 10px;
+            display: block;
+        }
+        .time-accept {
+            background-color: #003366;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .time-accept:hover {
+            background-color: #002244;
+        }
+        .time-title {
+            color: #ed7318;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0.7; }
             100% { opacity: 1; }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
             .venta p {
-                font-size: 13px;
+                font-size: 14px;
             }
             .note {
                 font-size: 15px;
@@ -192,6 +256,34 @@
             }
             .header-images img:last-child {
                 width: 130px;
+            }
+            .time-message p {
+                font-size: 15px;
+            }
+            .time-message img {
+                max-width: 80%; /* Un poco más grande en móviles */
+            }
+            .greeting {
+                font-size: 15px;
+            }
+            .header-title {
+                font-size: 16px;
+            }
+            .boton {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .venta p {
+                font-size: 13px;
+            }
+            .note {
+                font-size: 14px;
+            }
+            .time-message p {
+                font-size: 14px;
             }
         }
     </style>
@@ -213,7 +305,7 @@
                 <p>Si es solicitud de códigos para ingresos en cuentas Amazon Prime o Disney, por favor escribe a nuestro chat para que nuestro personal te dé las instrucciones y el código, ya que este debe ser solicitado y entregado en 15 minutos máximo.</p>
                 <p>ATENTAMENTE: DEPARTAMENTO DE SOPORTE TÉCNICO VENDE Y GANA</p>
                 <div class="botones">
-                    <button class="boton" onclick="openFormModal()">REALIZAR REPORTE</button>
+                    <button class="boton" onclick="checkBusinessHours()">REALIZAR REPORTE</button>
                 </div>
             </div>
         </div>
@@ -226,7 +318,22 @@
         </div>
     </div>
 
+    <div class="time-overlay" id="time-overlay">
+        <div class="time-message">
+            <h3 class="time-title">ATENCIÓN</h3>
+            <p>ESTIMADO USUARI@: En este momento nuestros operadores se encuentran en descanso. Atenderemos tu reporte cuando estemos nuevamente activos en nuestro horario de atención:</p>
+            <p><strong>Lunes a Sábado:</strong> 8 AM a 8 PM<br>
+            <strong>Domingos:</strong> 10 AM a 8 PM</p>
+            <p>Puedes generar el reporte ahora, pero será atendido en los horarios antes mencionados.</p>
+            <img src="https://i.pinimg.com/736x/db/8f/55/db8f55e9002f0c27a57f75144c4fd7ef.jpg" alt="Horario de atención">
+            <button class="time-accept" onclick="acceptTimeMessage()">ENTIENDO Y ACEPTO</button>
+        </div>
+    </div>
+
     <script>
+        // Cambiar a false para desactivar la simulación fuera de horario
+        const SIMULAR_FUERA_DE_HORARIO = true;
+
         function openModal() {
             document.getElementById('overlay').style.display = 'flex';
             setGreeting();
@@ -260,9 +367,38 @@
             greetingElement.textContent = greeting;
         }
 
+        function checkBusinessHours() {
+            const now = new Date();
+            const hours = now.getHours();
+            const day = now.getDay(); // 0 es domingo, 1 es lunes, etc.
+            
+            let isBusinessHour = false;
+            
+            if (SIMULAR_FUERA_DE_HORARIO) {
+                // Forzar fuera de horario para probar el mensaje
+                isBusinessHour = false;
+            } else {
+                if (day >= 1 && day <= 6) { // Lunes a Sábado
+                    isBusinessHour = (hours >= 8 && hours < 20);
+                } else if (day === 0) { // Domingo
+                    isBusinessHour = (hours >= 10 && hours < 20);
+                }
+            }
+            
+            if (isBusinessHour) {
+                openFormModal();
+            } else {
+                document.getElementById('time-overlay').style.display = 'flex';
+            }
+        }
+
+        function acceptTimeMessage() {
+            document.getElementById('time-overlay').style.display = 'none';
+            openFormModal();
+        }
+
         function openFormModal() {
             document.getElementById('form-overlay').style.display = 'flex';
-            // Asegurar que el iframe se cargue correctamente en móviles
             document.querySelector('.form-iframe').src = "https://vendeygana.forms.app/reportefalla";
         }
 
@@ -270,7 +406,6 @@
             document.getElementById('form-overlay').style.display = 'none';
         }
 
-        // Ajustar altura del overlay en dispositivos móviles
         window.addEventListener('resize', function() {
             const overlay = document.getElementById('overlay');
             overlay.style.height = window.innerHeight + 'px';
