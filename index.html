@@ -211,7 +211,7 @@
             text-align: center;
         }
         .time-message img {
-            max-width: 60%; /* Reducida en un 40% */
+            max-width: 60%;
             height: auto;
             margin: 15px auto;
             border-radius: 10px;
@@ -261,7 +261,7 @@
                 font-size: 15px;
             }
             .time-message img {
-                max-width: 80%; /* Un poco más grande en móviles */
+                max-width: 80%;
             }
             .greeting {
                 font-size: 15px;
@@ -331,9 +331,6 @@
     </div>
 
     <script>
-        // Cambiar a false para desactivar la simulación fuera de horario
-        const SIMULAR_FUERA_DE_HORARIO = true;
-
         function openModal() {
             document.getElementById('overlay').style.display = 'flex';
             setGreeting();
@@ -370,18 +367,28 @@
         function checkBusinessHours() {
             const now = new Date();
             const hours = now.getHours();
+            const minutes = now.getMinutes();
             const day = now.getDay(); // 0 es domingo, 1 es lunes, etc.
             
             let isBusinessHour = false;
             
-            if (SIMULAR_FUERA_DE_HORARIO) {
-                // Forzar fuera de horario para probar el mensaje
-                isBusinessHour = false;
-            } else {
-                if (day >= 1 && day <= 6) { // Lunes a Sábado
-                    isBusinessHour = (hours >= 8 && hours < 20);
-                } else if (day === 0) { // Domingo
-                    isBusinessHour = (hours >= 10 && hours < 20);
+            if (day >= 1 && day <= 6) { // Lunes a Sábado
+                // Horario: 8:00 AM a 8:00 PM
+                if (hours > 8 && hours < 20) {
+                    isBusinessHour = true;
+                } else if (hours === 8 && minutes >= 0) {
+                    isBusinessHour = true;
+                } else if (hours === 20 && minutes === 0) {
+                    isBusinessHour = true;
+                }
+            } else if (day === 0) { // Domingo
+                // Horario: 10:00 AM a 8:00 PM
+                if (hours > 10 && hours < 20) {
+                    isBusinessHour = true;
+                } else if (hours === 10 && minutes >= 0) {
+                    isBusinessHour = true;
+                } else if (hours === 20 && minutes === 0) {
+                    isBusinessHour = true;
                 }
             }
             
